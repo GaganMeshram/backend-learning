@@ -3,6 +3,7 @@ import express from 'express'
 import connectDB from "./db/db.js";
 
 const app = express()
+const PORT = process.env.PORT
 
 dotenv.config(
     {
@@ -31,3 +32,11 @@ catch (error) {
 */
 
 connectDB()
+.then(()=>{
+    app.listen(PORT || 8000, ()=>{
+        console.log(`Server is up and running on ${PORT}`)
+    })
+})
+.catch((err)=>{
+    console.log(`Database connection FAILED !!! `, err)
+})
